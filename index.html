@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Juslt的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="书上得来终觉浅">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Juslt的博客">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Juslt的博客">
+<meta property="og:description" content="书上得来终觉浅">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Juslt的博客">
+<meta name="twitter:description" content="书上得来终觉浅">
+  
+    <link rel="alternate" href="/atom.xml" title="Juslt的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Juslt的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个不太安分的程序员</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Gradle For Android(一)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/27/Gradle For Android(一)/" class="article-date">
+  <time datetime="2018-09-27T14:21:06.252Z" itemprop="datePublished">2018-09-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p>如果你想用Gradle构建一个Android Project，那么就需要用到build.gradle脚本文件。<br>gradle会提供一些默认的配置用于我们构建project</p>
+<h3 id="了解Gradle后我们可以做什么"><a href="#了解Gradle后我们可以做什么" class="headerlink" title="了解Gradle后我们可以做什么"></a>了解Gradle后我们可以做什么</h3><ul>
+<li>自定义编译输出文件格式</li>
+<li>hook Android编译过程</li>
+<li>配置和改善 Gradle 编译速度</li>
+</ul>
+<h3 id="Gradle的编译周期"><a href="#Gradle的编译周期" class="headerlink" title="Gradle的编译周期"></a>Gradle的编译周期</h3><p><code>Project</code> 和 <code>Task</code> Gradle中的两大概念<br>每个项目里至少有一个Project ,一个build.gradle就代表一个project。一个Project对应多个Task,Task又对应多个Action,action是一个代码块，里边包含了需要被执行的代码。</p>
+<p>编译的过程分为三个阶段</p>
+<ul>
+<li>初始化阶段</li>
+<li>配置阶段</li>
+<li>执行阶段</li>
+</ul>
+<h3 id="Gradle-Wrapper"><a href="#Gradle-Wrapper" class="headerlink" title="Gradle Wrapper"></a>Gradle Wrapper</h3><h3 id="Gradle-basics"><a href="#Gradle-basics" class="headerlink" title="Gradle basics"></a>Gradle basics</h3><p><code>./gradlew tasks</code> 列出所有的task<br><code>./gradlew tasks -all</code> 列出每个task依赖的其他task</p>
+<h3 id="Repositories"><a href="#Repositories" class="headerlink" title="Repositories"></a>Repositories</h3><p><code>Maven</code><br><code>JCenter</code></p>
+<h3 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h3><p>每个库的名称包含三个元素：<code>组名：库名:版本号</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies&#123;</span><br><span class="line">    compile &apos;com.google.code.gson:gson:2.3&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Local-dependencies"><a href="#Local-dependencies" class="headerlink" title="Local dependencies"></a>Local dependencies</h4><h4 id="File-dependencies"><a href="#File-dependencies" class="headerlink" title="File dependencies"></a>File dependencies</h4><p>通过<code>files()</code>方法添加文件依赖，如果有很多的jar文件，我们也可以通过<code>fileTree()</code>方法添加一个文件夹。<br>除此之外我们还可以使用通配符的方式添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies&#123;</span><br><span class="line">    compile fileTree(dir:&apos;libs&apos;,include:[&apos;*.jar&apos;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Native-libraries"><a href="#Native-libraries" class="headerlink" title="Native libraries"></a>Native libraries</h4><p>配置本地<code>.so</code>库.<br>在配置文件中添加如下配置，然后在对应位置建立文件夹，加入对用的.so文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">    sourceSets&#123;</span><br><span class="line">        main&#123;</span><br><span class="line">            jniLibs.srcDir &apos;src/main/libs&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Library-projects"><a href="#Library-projects" class="headerlink" title="Library projects"></a>Library projects</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apply plugin:&apos;com.android.library&apos;</span><br></pre></td></tr></table></figure>
+<p>我们也可以把项目打包成<code>aar</code> 文件引入<br>在build.gradle文件中配置仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositories&#123;</span><br><span class="line">    flatDir&#123;</span><br><span class="line">        dirs &apos;aars&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当引用<code>arr</code>文件时，通过以下方式引用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependecies&#123;</span><br><span class="line">    complie(name:&apos;libraryname&apos;,ext:&apos;aar&apos;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Build-Variants"><a href="#Build-Variants" class="headerlink" title="Build Variants"></a>Build Variants</h3><h4 id="Build-Type"><a href="#Build-Type" class="headerlink" title="Build Type"></a>Build Type</h4><p>android 默认带有debug 和 release两种类型，我们可以添加一个新的编译类型<code>statging</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">    buildTypes&#123;</span><br><span class="line">        staging.initWith(buildTypes.debug)</span><br><span class="line">        ... //未完成</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Source-sets"><a href="#Source-sets" class="headerlink" title="Source sets"></a>Source sets</h4><p>每当创建一个新的build type的时候，gradle会默认创建一个新的source set</p>
+<h3 id="Product-flavors"><a href="#Product-flavors" class="headerlink" title="Product flavors"></a>Product flavors</h3><p>…       … //未完成</p>
+<h3 id="Signing-configurations"><a href="#Signing-configurations" class="headerlink" title="Signing configurations"></a>Signing configurations</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">    signingConfigs&#123;</span><br><span class="line">       release&#123;</span><br><span class="line">            keyAlias &quot;&quot;</span><br><span class="line">            keyPassword &quot;&quot;</span><br><span class="line">            storeFile file(&apos;../17wan8.jks&apos;)</span><br><span class="line">            storePassword &quot;&quot;</span><br><span class="line">       &#125;</span><br><span class="line">       debug&#123;</span><br><span class="line">           //..debug 系统会默认指定，也可以自己指定</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置之后我们需要在build type中直接使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">    buildType&#123;</span><br><span class="line">        release&#123;</span><br><span class="line">            signingConfig singingConfigs.release</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Optimize"><a href="#Optimize" class="headerlink" title="Optimize"></a>Optimize</h4><p>Speeding up multimodule builds</p>
+<ul>
+<li><p>开启并行编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.parallel =true</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开启编译守护进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.daemon=ture</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加大可用编译内存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.jamargs=-Xms256m -Xms1024m</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Reducing-apk-file"><a href="#Reducing-apk-file" class="headerlink" title="Reducing apk file"></a>Reducing apk file</h4><p>在编译的时候，我们可能会有很多资源并没有用到，此时就可以通过<code>shrinkResources</code>来优化我们的资源文件，除去那些不必要的资源。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">    buildType&#123;</span><br><span class="line">        release&#123;</span><br><span class="line">            shrikResources = ture</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/27/Gradle For Android(一)/" data-id="cjmkq4mk5000160vkpxctrfi1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android-Gradle配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/27/Android-Gradle配置/" class="article-date">
+  <time datetime="2018-09-27T14:14:52.000Z" itemprop="datePublished">2018-09-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/27/Android-Gradle配置/">Android Gradle配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/27/Android-Gradle配置/" data-id="cjmkq4mk0000060vkrrm993u6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/27/hello-world/" class="article-date">
+  <time datetime="2018-09-27T13:49:53.773Z" itemprop="datePublished">2018-09-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/27/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/27/hello-world/" data-id="cjmkq4mk7000260vkz33gs0g2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/27/Gradle For Android(一)/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/Android-Gradle配置/">Android Gradle配置</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Juslt<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
